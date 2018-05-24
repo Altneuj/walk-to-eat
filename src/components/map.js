@@ -35,6 +35,7 @@ class Map extends React.Component {
       if (restaurant.position) {
         return (
           <Marker
+            key={restaurant.id}
             lat={restaurant.position[0]}
             lng={restaurant.position[1]}
           />
