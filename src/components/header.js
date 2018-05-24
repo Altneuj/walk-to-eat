@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {fetchRestaurants, fetchCurrent} from '../actions'
+import {fetchRestaurants, fetchCurrent, fetchFoods} from '../actions'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -49,7 +49,7 @@ function mapStateToProps({currentLocation}){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchRestaurants, fetchCurrent}, dispatch)
+  return bindActionCreators({fetchRestaurants, fetchCurrent, fetchFoods}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -6,6 +6,7 @@ const ROOT_URL_FOOD = 'https://trackapi.nutritionix.com/v2/search/instant'
 export const FETCH_RESTAURANTS = "fetch_restaurants";
 export const FETCH_CURRENT = "fetch_current";
 export const SHORTENED_LIST = "shortened_list"
+export const FETCH_FOOD = 'fetch_food';
 const app_id = 'ywegjljTpyiHoMNwUD6Z';
 const app_code ='ypSNbilqIyvvxhFmG-Mx6g';
 
@@ -48,14 +49,24 @@ export function resetRestaurants(list){
 }
 
 export function fetchFoods(query){
-  const config = axios.create({
-    q: query,
+  const config = {
+    query: query,
     detailed: true,
-    headers: {
-      'x-app-id': '91ee9f1a',
-      'x-app-key': 'a40b3d2bd1b43e6acf6e6821582c0dfe'
-  })
   }
+  const headersConfig =  {
+    'x-app-id': '91ee9f1a',
+    'x-app-key': 'a40b3d2bd1b43e6acf6e6821582c0dfe'
+}
+  const request = axios({
+    url: ROOT_URL_FOOD,
+      headers: headersConfig,
+    method: 'get',
+    params: config
 
+});
 
+return {
+  type: FETCH_FOOD,
+  payload: request
+}
 }
