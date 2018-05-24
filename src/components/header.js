@@ -44,8 +44,8 @@ class Header extends Component {
 
 };
 
-function mapStateToProps({currentLocation}){
-  return{currentLocation}
+function mapStateToProps({currentLocation, food}){
+  return{currentLocation, food}
 }
 
 function mapDispatchToProps(dispatch){
