@@ -10,7 +10,7 @@ class App extends Component{
   return (
     <div>
       <Header />
-      {/* <Map /> */}
+      <Map />
       <List />
     </div>
     )
