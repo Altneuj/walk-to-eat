@@ -41,7 +41,6 @@ class Map extends React.Component {
           />
         );
       }
-
     })
   }
 
@@ -56,7 +55,12 @@ class Map extends React.Component {
           zoom={12}
           loadingMessage={'Be happy'}
           params={params}
-          onMapCreated={this.onMapCreated}>
+          onMapCreated={this.onMapCreated}
+        >
+        <Marker
+          lat={this.props.coords.latitude}
+          lng={this.props.coords.longitude}
+        />
         {this.renderMarkers()}
 
         </Gmaps>

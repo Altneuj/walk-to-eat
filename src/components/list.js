@@ -10,7 +10,7 @@ class List extends Component {
     const newListFormat = []
 
     this.props.restaurants.forEach(item => {
-      if (item.position && item.vicinity) {
+      if (item.position && item.vicinity && item.category.includes("food")) {
         let lat = item.position[0]
         let lon = item.position[1]
         item.distance = geodist({
@@ -24,16 +24,12 @@ class List extends Component {
         item.address = item.vicinity.split('<br/>').join(' ');
 
         newListFormat.push(item);
-        //sort and slice here. Map newList
       }
     })
 
     let categorizedList = newListFormat.filter(function(item) {
-      let substring = "food";
-      if (item.category) {
-        if (item.category.includes(substring)) {
-          return item;
-        };
+      if(item.distance >1){
+        return item;
       }
     })
 
@@ -50,10 +46,7 @@ class List extends Component {
     return categorizedList.map(item => {
       return (
       //TODO VALIDATION
-      <li className='list-group-item' key={item.id}>{item.title}
-        --- {item.address}
-        --- {item.distance}
-        Miles
+      <li className='list-group-item' key={item.id}>{item.title} --- {item.address} --- {item.distance} Miles
       </li>);
     });
 
