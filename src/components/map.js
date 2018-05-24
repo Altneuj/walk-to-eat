@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
-const coords = {
-  lat: 36.0010948,
-  lng: -78.8968539
-};
-
 const params = {v: '3.exp', key: 'AIzaSyB-w6uVNO3Cs4EMkSvEojoqeyHnTXOvbQU'};
 
 class Map extends React.Component {
+  const coords = {
+    lat: current.latitude,
+    lng: current.longitude
+  };
 
   onMapCreated(map) {
     map.setOptions({
