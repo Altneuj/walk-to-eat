@@ -31,32 +31,30 @@ class Map extends React.Component {
 
   render() {
     return (
-      <Gmaps
-        width={'800px'}
-        height={'600px'}
-        lat={this.props.coords.latitude}
-        lng={this.props.coords.longitude}
-        zoom={12}
-        loadingMessage={'Be happy'}
-        params={params}
-        onMapCreated={this.onMapCreated}>
-        <Marker
+      <div className="row justify-content-center mt-3">
+        <Gmaps
+          width={'800px'}
+          height={'600px'}
           lat={this.props.coords.latitude}
           lng={this.props.coords.longitude}
-          draggable={true}
-          onDragEnd={this.onDragEnd} />
+          zoom={12}
+          loadingMessage={'Be happy'}
+          params={params}
+          onMapCreated={this.onMapCreated}>
           <Marker
-            lat={35.901}
-            lng={-78}
-            draggable={true}
-            onDragEnd={this.onDragEnd} />
-        <InfoWindow
-          lat={this.props.coords.latitude}
-          lng={this.props.coords.longitude}
-          content={'Hello, React :)'}
-          onCloseClick={this.onCloseClick} />
+            lat={this.props.coords.latitude}
+            lng={this.props.coords.longitude}/>
+            <Marker
+              lat={35.901}
+              lng={-78}/>
+          <InfoWindow
+            lat={this.props.coords.latitude}
+            lng={this.props.coords.longitude}
+            content={'YOU ARE HERE!'}
+            onCloseClick={this.onCloseClick} />
 
-      </Gmaps>
+        </Gmaps>
+      </div>
     );
   }
 

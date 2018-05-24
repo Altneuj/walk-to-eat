@@ -32,14 +32,14 @@ class Header extends Component {
 
   render() {
     return(
-      <div className="search-bar row justify-content-center">
-        <h3 className="app-title col-4">Walk to Eat</h3>
+      <div className="search-bar row justify-content-center p-2 mt-2">
+        <h3 className="app-title col-3 text-center">Walk to Eat</h3>
         <input
-          className={this.state.badQuery ? 'form-control col-6 inputError' : "form-control col-6"}
+          className={this.state.badQuery ? 'form-control col-5 inputError' : "form-control col-6"}
           onChange={event => this.setState({query: event.target.value})}
           value={this.state.query} placeholder="McDonald"/>
         <button
-          className="normal-button col-2 justify-content-center mr-2"
+          className="normal-button col-2 justify-content-center"
           onClick={this.validateQuery}>Search</button>
       </div>
     )
