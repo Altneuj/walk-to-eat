@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const params = {v: '3.exp', key: 'AIzaSyB-w6uVNO3Cs4EMkSvEojoqeyHnTXOvbQU'};
 
 class Map extends React.Component {
-  const coords = {
-    lat: current.latitude,
-    lng: current.longitude
-  };
+  constructor(props) {
+    console.log(props)
+    super(props);
+  }
 
   onMapCreated(map) {
     map.setOptions({
@@ -33,31 +34,38 @@ class Map extends React.Component {
       <Gmaps
         width={'800px'}
         height={'600px'}
-        lat={coords.lat}
-        lng={coords.lng}
+        lat={this.props.coords.latitude}
+        lng={this.props.coords.longitude}
         zoom={12}
         loadingMessage={'Be happy'}
         params={params}
         onMapCreated={this.onMapCreated}>
         <Marker
-          lat={coords.lat}
-          lng={coords.lng}
+          lat={this.props.coords.latitude}
+          lng={this.props.coords.longitude}
           draggable={true}
           onDragEnd={this.onDragEnd} />
+          <Marker
+            lat={35.901}
+            lng={-78}
+            draggable={true}
+            onDragEnd={this.onDragEnd} />
         <InfoWindow
-          lat={coords.lat}
-          lng={coords.lng}
+          lat={this.props.coords.latitude}
+          lng={this.props.coords.longitude}
           content={'Hello, React :)'}
           onCloseClick={this.onCloseClick} />
-        <Circle
-          lat={coords.lat}
-          lng={coords.lng}
-          radius={500}
-          onClick={this.onClick} />
+
       </Gmaps>
     );
   }
 
 };
 
-export default Map;
+function mapStateToProps(state) {
+  return {
+    coords: state.currentLocation,
+  };
+}
+
+export default connect(mapStateToProps)(Map);
