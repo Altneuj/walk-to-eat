@@ -1,7 +1,8 @@
 import axios from "axios";
 
 
-const ROOT_URL = "https://places.cit.api.here.com/places/v1/autosuggest?";
+const ROOT_URL_RESTAURANTS = "https://places.cit.api.here.com/places/v1/autosuggest?";
+const ROOT_URL_FOOD = 'https://trackapi.nutritionix.com/v2/search/instant'
 export const FETCH_RESTAURANTS = "fetch_restaurants";
 export const FETCH_CURRENT = "fetch_current";
 export const SHORTENED_LIST = "shortened_list"
@@ -18,7 +19,7 @@ export function fetchRestaurants(query, current) {
     in: `${current.latitude},${current.longitude};r=10000`
   }
 
-    const request = axios.get(`${ROOT_URL}`, {params: config});
+    const request = axios.get(`${ROOT_URL_RESTAURANTS}`, {params: config});
   return {
     type: FETCH_RESTAURANTS,
     payload: request
@@ -44,4 +45,17 @@ export function resetRestaurants(list){
     type: SHORTENED_LIST,
     payload: list
   }
+}
+
+export function fetchFoods(query){
+  const config = axios.create({
+    q: query,
+    detailed: true,
+    headers: {
+      'x-app-id': '91ee9f1a',
+      'x-app-key': 'a40b3d2bd1b43e6acf6e6821582c0dfe'
+  })
+  }
+
+
 }
