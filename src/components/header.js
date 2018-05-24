@@ -24,8 +24,9 @@ class Header extends Component {
 
   validateQuery = () => {
     if(this.state.query !== ''){
+      debugger;
       // this.props.fetchRestaurants(this.state.query, this.props.currentLocation)
-      console.log("HANDLE CLICK WORKS")
+      console.log( state.currentLocation, state.currentLocation.latitude)
     } else {
       this.setState({badQuery: true});
     }
@@ -37,8 +38,8 @@ class Header extends Component {
         <h3 className="app-title col-4">Walk to Eat</h3>
         <input
           className={this.state.badQuery ? 'form-control col-6 inputError' : "form-control col-6"}
-          onChange={event => this.setState({name: event.target.value})}
-          value={this.state.name} placeholder="McDonald"/>
+          onChange={event => this.setState({query: event.target.value})}
+          value={this.state.query} placeholder="McDonald"/>
         <button
           className="normal-button col-2 justify-content-center mr-2"
           onClick={this.validateQuery}>Search</button>

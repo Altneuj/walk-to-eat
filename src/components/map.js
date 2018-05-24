@@ -1,2 +1,2 @@
-import React, { Component } from "react";
-import HEREMAP from 'react-here-maps';
+// import React, { Component } from "react";
+// import HEREMAP from 'react-here-maps';
