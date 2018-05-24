@@ -4,6 +4,7 @@ import axios from "axios";
 const ROOT_URL = "https://places.cit.api.here.com/places/v1/autosuggest?";
 export const FETCH_RESTAURANTS = "fetch_restaurants";
 export const FETCH_CURRENT = "fetch_current";
+export const SHORTENED_LIST = "shortened_list"
 const app_id = 'ywegjljTpyiHoMNwUD6Z';
 const app_code ='ypSNbilqIyvvxhFmG-Mx6g';
 
@@ -36,4 +37,11 @@ return {
   type: FETCH_CURRENT,
   payload: getPosition()
 }
+}
+
+export function resetRestaurants(list){
+  return {
+    type: SHORTENED_LIST,
+    payload: list
+  }
 }
