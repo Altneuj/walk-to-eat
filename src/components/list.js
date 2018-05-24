@@ -24,7 +24,6 @@ class List extends Component {
         item.address = item.vicinity.split('<br/>').join(' ');
 
         newListFormat.push(item);
-        //sort and slice here. Map newList
       }
     })
 
