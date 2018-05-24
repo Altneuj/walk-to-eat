@@ -44,32 +44,38 @@ class List extends Component {
       return 0;
     });
 
-    return categorizedList.map(item => {
-      return (
-      //TODO VALIDATION
-      <li className='list-group-item' key={item.id}>
-        <div className="restarant-details">
-          {item.title} --- {item.address} --- {item.distance} Miles
-        </div>
-        <div className="foods-available">
-          <ul>
-            {foodList.map(foodItem => {
-              foodItem.full_nutrients.map(n => {
-                if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
-                  return (
-                    <li>{foodItem.food_name}</li>
-                  );
-                }
-              })
-            })}
-          </ul>
+    if (foodList.length > 0) {
+      return categorizedList.map(item => {
+        return (
+        //TODO VALIDATION
+        <li className='list-group-item' key={item.id}>
+          <div className="restarant-details">
+            {item.title} --- {item.address} --- {item.distance} Miles
+          </div>
+          <div className="foods-available">
+            <ul>
+              {foodList.map(foodItem => {
+                return (
+                  foodItem.full_nutrients.map(n => {
+                    if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
+                      return (
+                        <li>{item.caloriesAvailable}-{foodItem.food_name}-{n.value}</li>
+                      );
+                    }
+                  })
+                )
+              })}
+            </ul>
 
-        </div>
+          </div>
 
-      </li>);
-    });
+        </li>);
+      });
+    }
 
-      this.props.resetRestaurants(categorizedList)
+
+
+      // this.props.resetRestaurants(categorizedList)
   }
 
   render() {
