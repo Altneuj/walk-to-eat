@@ -15,11 +15,7 @@ class Header extends Component {
     }
 
     this.props.fetchCurrent();
-    // const handleLocation = () =>{
-    //   console.log("handle location works");
-    //   // this.props.fetchCurrent()
-    // }
-    // handleLocation();
+
   }
 
   validateQuery = () => {
