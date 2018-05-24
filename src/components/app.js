@@ -1,17 +1,20 @@
-import React from "react";
-import Header from "./components/header";
-import Map from "./components/map";
-import List from "./components/list";
+import React, {Component} from "react";
+import Header from "./header";
+import Map from "./map";
+import List from "./list";
 
 
-const App = (props) => {
+class App extends Component{
+
+  render(){
   return (
     <div>
       <Header />
-      <Map />
-      <List />
+      {/* <Map /> */}
+      {/* <List /> */}
     </div>
-  );
+    )
+  }
 };
 
 export default App;

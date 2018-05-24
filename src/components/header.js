@@ -1,18 +1,32 @@
 import React, { Component } from "react";
+import {fetchRestaurants, fetchCurrent} from '../actions'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+
 
 class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      query: '';
-      badQuery: false;
+      query: '',
+      badQuery: false
     }
+
+    const currentLocation = this.props.fetchCurrent();
+    // const handleLocation = () =>{
+    //   console.log("handle location works");
+    //   // this.props.fetchCurrent()
+    // }
+    // handleLocation();
+    console.log(currentLocation);
   }
 
   validateQuery = () => {
-    if(this.state.query != ''){
-
+    if(this.state.query !== ''){
+      // this.props.fetchRestaurants(this.state.query, this.props.currentLocation)
+      console.log("HANDLE CLICK WORKS")
     } else {
       this.state.badQuery = true;
     }
@@ -34,3 +48,13 @@ class Header extends Component {
   }
 
 };
+
+function mapStateToProps({currentLocation}){
+  return{currentLocation}
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchRestaurants, fetchCurrent}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
