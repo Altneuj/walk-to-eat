@@ -55,7 +55,7 @@ class List extends Component {
 
   render() {
     if (this.props.restaurants) {
-      return (<div>
+      return (<div className='row justify-content-center'>
         <h3>Choices below:</h3>
         <ul className='list-group'>
           {this.renderListItems()}
