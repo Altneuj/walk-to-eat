@@ -14,13 +14,12 @@ class Header extends Component {
       badQuery: false
     }
 
-    const currentLocation = this.props.fetchCurrent();
+    this.props.fetchCurrent();
     // const handleLocation = () =>{
     //   console.log("handle location works");
     //   // this.props.fetchCurrent()
     // }
     // handleLocation();
-    console.log(currentLocation);
   }
 
   validateQuery = () => {

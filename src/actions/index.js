@@ -23,8 +23,22 @@ export function fetchRestaurants(query, current) {
 }
 
 export function fetchCurrent(){
-  // let location = navigator.geolocation.getCurrentPosition();
+  var getPosition = function (options) {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+  }
 
+  console.log(getPosition());
+  // getPosition()
+  //   .then((position) => {
+  //     console.log(position);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err.message);
+  //   });
+
+  // let location = navigator.geolocation.getCurrentPosition();
   // const location = navigator.geolocation.getCurrentPosition((position) => position.coords.longitude);
   // console.log(location);
   //
@@ -36,8 +50,8 @@ export function fetchCurrent(){
 //   location = position.coords
 // });
 
-// return {
-//   type: FETCH_CURRENT,
-//   payload: navigator.geolocation.getCurrentPosition((position) =>  position.coords)
-// }
+return {
+  type: FETCH_CURRENT,
+  payload: getPosition()
+}
 }
