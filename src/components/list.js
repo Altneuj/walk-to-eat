@@ -49,8 +49,13 @@ class List extends Component {
         return (
         //TODO VALIDATION
         <li className='list-group-item' key={item.id}>
-          <div className="restarant-details">
-            {item.title} --- {item.address} --- {item.distance} Miles
+          <div className="restaurant">
+            <div className="title">
+              {item.title}
+            </div>
+            <div className="details">
+              {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
+            </div>
           </div>
           <div className="foods-available">
             <ul>
@@ -59,7 +64,7 @@ class List extends Component {
                   foodItem.full_nutrients.map(n => {
                     if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
                       return (
-                        <li>{item.caloriesAvailable}-{foodItem.food_name}-{n.value}</li>
+                        <li>{foodItem.food_name} ({n.value} Calories)</li>
                       );
                     }
                   })

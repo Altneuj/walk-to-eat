@@ -3,3 +3,30 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.restaurant {
+  padding: 10px;
+  background-color: #f3f0fa;
+}
+.restaurant .title {
+  font-size: 1.5em;
+}
+.list-group-item {
+  margin-bottom: 10px;
+  padding: 0;
+}
+.foods-available ul {
+  list-style: none;
+  padding-left: 0;
+}
+.foods-available li {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px;
+  text-transform: capitalize;
+  /* width: 96%; */
+}
+.foods-available li:nth-child(even){
+  background-color: #efefef;
+}
+.foods-available li:last-child{
+  border-bottom: none;
+}
