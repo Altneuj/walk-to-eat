@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import _ from "lodash";
 import { connect } from 'react-redux';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
@@ -29,6 +30,20 @@ class Map extends React.Component {
     console.log('onClick', e);
   }
 
+  renderMarkers() {
+    return _.map(this.props.restaurants, restaurant => {
+      if (restaurant.position) {
+        return (
+          <Marker
+            lat={restaurant.position[0]}
+            lng={restaurant.position[1]}
+          />
+        );
+      }
+
+    })
+  }
+
   render() {
     return (
       <div className="row justify-content-center mt-3">
@@ -41,17 +56,7 @@ class Map extends React.Component {
           loadingMessage={'Be happy'}
           params={params}
           onMapCreated={this.onMapCreated}>
-          <Marker
-            lat={this.props.coords.latitude}
-            lng={this.props.coords.longitude}/>
-            <Marker
-              lat={35.901}
-              lng={-78}/>
-          <InfoWindow
-            lat={this.props.coords.latitude}
-            lng={this.props.coords.longitude}
-            content={'YOU ARE HERE!'}
-            onCloseClick={this.onCloseClick} />
+        {this.renderMarkers()}
 
         </Gmaps>
       </div>
@@ -63,6 +68,7 @@ class Map extends React.Component {
 function mapStateToProps(state) {
   return {
     coords: state.currentLocation,
+    restaurants: state.restaurants
   };
 }
 
