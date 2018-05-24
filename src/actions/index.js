@@ -16,7 +16,7 @@ export function fetchRestaurants(query, current) {
     q: query,
     in: `${current.latitude},${current.longitude};r=10000`
   }
-  // const request = axios.get(`${ROOT_URL}in=${current.latitude},${current.longitude};r=10000&q${query}&app_id=${app_id}&app_code=${app_code}`);
+
     const request = axios.get(`${ROOT_URL}`, {params: config});
   return {
     type: FETCH_RESTAURANTS,
@@ -31,26 +31,6 @@ export function fetchCurrent(){
     });
   }
 
-  console.log(getPosition());
-  // getPosition()
-  //   .then((position) => {
-  //     console.log(position);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err.message);
-  //   });
-
-  // let location = navigator.geolocation.getCurrentPosition();
-  // const location = navigator.geolocation.getCurrentPosition((position) => position.coords.longitude);
-  // console.log(location);
-  //
-  //   return {
-  //     type: FETCH_CURRENT,
-  //     payload: location
-  //   }
-// navigator.geolocation.getCurrentPosition((position) => {
-//   location = position.coords
-// });
 
 return {
   type: FETCH_CURRENT,
