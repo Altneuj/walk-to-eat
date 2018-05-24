@@ -21,6 +21,7 @@ class Header extends Component {
   validateQuery = () => {
     if(this.state.query !== ''){
    this.props.fetchRestaurants(this.state.query, this.props.currentLocation)
+       this.props.fetchFoods(this.state.query);
     } else {
       this.setState({badQuery: true});
     }
