@@ -5,7 +5,7 @@ import geodist from 'geodist'
 
 class List extends Component{
   renderListItems(){
-    const newList = this.props.restaurants.map(item => {
+    const newListFormat = this.props.restaurants.map(item => {
         if(item.position){
             let lat = item.position[0]
             let lon = item.position[1]
@@ -13,14 +13,35 @@ class List extends Component{
             item.caloriesAvailable = (item.distance*2)*100
             //sort and slice here. Map newList
         }
+        if(item.vicinity){
+          item.address = item.vicinity.split('<br/>').join(' ');
+        }
         return item
       })
-  console.log(newList)
-  console.log(this.props.restaurants)
-      return newList.map(item => {
+
+    let categorizedList = newListFormat.filter(function(item){
+      let substring = "food";
+      if(item.category){
+        if(item.category.includes(substring)){
+          return item;
+        };
+      }
+    })
+
+    categorizedList.sort((a, b) => {
+      if (a.distance > b.distance) {
+        return -1;
+      }
+      if (a.distance < b.distance) {
+        return 1;
+      }
+      return 0;
+    });
+
+      return categorizedList.map(item => {
     return (
       //TODO VALIDATION
-      <li className='list-group-item' key={item.id}>{item.title} --- {item.vicinity} --- {item.distance} Miles </li>
+      <li className='list-group-item' key={item.id}>{item.title} --- {item.address} --- {item.distance} Miles </li>
       );
     });
   }
