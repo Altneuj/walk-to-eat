@@ -6,7 +6,7 @@ export default function(state = {}, action){
   switch(action.type){
     case FETCH_CURRENT:
     console.log(action.payload)
-      return {...state, currentLocation : action.payload.coords};
+      return {...state, latitude: action.payload.coords.latitude, longitude: action.payload.coords.longitude};
     default:
       return state;
   }
