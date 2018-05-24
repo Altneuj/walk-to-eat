@@ -27,7 +27,7 @@ class Header extends Component {
       // this.props.fetchRestaurants(this.state.query, this.props.currentLocation)
       console.log("HANDLE CLICK WORKS")
     } else {
-      this.state.badQuery = true;
+      this.setState({badQuery: true});
     }
   }
 
