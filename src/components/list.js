@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import geodist from 'geodist'
+import {resetRestaurants} from '../actions'
+
 
 class List extends Component {
   renderListItems() {
@@ -54,6 +56,8 @@ class List extends Component {
         Miles
       </li>);
     });
+
+      this.props.resetRestaurants(categorizedList)
   }
 
   render() {
@@ -72,8 +76,12 @@ class List extends Component {
   }
 }
 
-function mapStateToProps({restaurants, currentLocation}) {
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({resetRestaurants}, dispatch)
+}
+
+function mapStateToProps({restaurants, currentLocation}){
   return {restaurants, currentLocation}
 }
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);
