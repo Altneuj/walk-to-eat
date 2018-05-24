@@ -44,6 +44,6 @@ export function fetchFoods(query) {
     'x-app-key': 'a40b3d2bd1b43e6acf6e6821582c0dfe'
   }
   const request = axios({url: ROOT_URL_FOOD, headers: headersConfig, method: 'get', params: config});
-
+  request.then(console.log(request));
   return {type: FETCH_FOOD, payload: request}
 }
