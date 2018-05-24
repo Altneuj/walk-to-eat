@@ -8,6 +8,7 @@ import {resetRestaurants} from '../actions'
 class List extends Component {
   renderListItems() {
     const newListFormat = []
+    let foodList = this.props.food
 
     this.props.restaurants.forEach(item => {
       if (item.position && item.vicinity && item.category.includes("food")) {
@@ -46,7 +47,25 @@ class List extends Component {
     return categorizedList.map(item => {
       return (
       //TODO VALIDATION
-      <li className='list-group-item' key={item.id}>{item.title} --- {item.address} --- {item.distance} Miles
+      <li className='list-group-item' key={item.id}>
+        <div className="restarant-details">
+          {item.title} --- {item.address} --- {item.distance} Miles
+        </div>
+        <div className="foods-available">
+          <ul>
+            {foodList.map(foodItem => {
+              foodItem.full_nutrients.map(n => {
+                if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
+                  return (
+                    <li>{foodItem.food_name}</li>
+                  );
+                }
+              })
+            })}
+          </ul>
+
+        </div>
+
       </li>);
     });
 
@@ -73,8 +92,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({resetRestaurants}, dispatch)
 }
 
-function mapStateToProps({restaurants, currentLocation}){
-  return {restaurants, currentLocation}
+function mapStateToProps({restaurants, currentLocation, food}){
+  return {restaurants, currentLocation, food}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
