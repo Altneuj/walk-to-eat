@@ -14,7 +14,7 @@ class List extends Component {
   toggleFoodList = (item) => {
     let list = ReactDOM.findDOMNode(this.refs[item.id]);
     list.classList.toggle('hide');
-    
+
     let button =ReactDOM.findDOMNode(this.refs[item.id+"button"]);
     button.classList.toggle('fa-angle-double-down');
     button.classList.toggle('fa-angle-double-up');
@@ -106,11 +106,12 @@ class List extends Component {
   render() {
     if (this.props.restaurants) {
       return (
-        <div>
+        <div className="restaurants">
           <ul className='list-group justify-content-center'>
             {this.renderListItems()}
           </ul>
-        </div>);
+        </div>
+      );
     }
 
     return (
