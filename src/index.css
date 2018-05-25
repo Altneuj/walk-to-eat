@@ -101,3 +101,6 @@ li.restaurant {
 .hide {
   display:none;
 }
+.foodItems {
+  text-transform:capitalize;
+}
