@@ -49,14 +49,16 @@ class List extends Component {
         return (
         //TODO VALIDATION
         <li className='list-group-item' key={item.id}>
-          <div className="restaurant">
-            <div className="title">
-              {item.title}
+          <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
+            <div className="restaurant">
+              <div className="title">
+                {item.title}
+              </div>
+              <div className="details">
+                {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
+              </div>
             </div>
-            <div className="details">
-              {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
-            </div>
-          </div>
+          </a>
           <div className="foods-available">
             <ul>
               {foodList.map(foodItem => {
