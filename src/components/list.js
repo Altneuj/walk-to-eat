@@ -75,13 +75,13 @@ class List extends Component {
           </div>
 
           <div className="hide" ref={item.id}>
-            <ul>
+            <ul className="flex">
               {foodList.map(foodItem => {
                 return (
                   foodItem.full_nutrients.map(n => {
                     if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
                       return (
-                        <li>{foodItem.food_name} ({n.value} Calories)</li>
+                        <li order={n.value} className="foodItems">{foodItem.food_name} ({n.value} Calories)</li>
                       );
                     }
                   })

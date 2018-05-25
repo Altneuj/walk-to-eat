@@ -76,3 +76,6 @@ i.fa-crosshairs:hover {
 .hide {
   display:none;
 }
+.foodItems {
+  text-transform:capitalize;
+}
