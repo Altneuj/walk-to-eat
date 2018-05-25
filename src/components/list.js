@@ -11,7 +11,7 @@ class List extends Component {
   super(props);
 }
   toggleFoodList = (item) => {
-    var list = ReactDOM.findDOMNode(this.refs[item.id]);
+    let list = ReactDOM.findDOMNode(this.refs[item.id]);
     list.classList.toggle('hide');
   }
 

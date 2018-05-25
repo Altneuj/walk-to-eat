@@ -6,6 +6,7 @@
     "@dotcs/react-here-maps": "^0.6.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
+    "font-awesome": "^4.7.0",
     "geodist": "^0.2.1",
     "here-js-api": "^1.0.8",
     "lodash": "^4.17.10",

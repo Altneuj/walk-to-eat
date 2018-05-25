@@ -1,8 +1,51 @@
 body {
   margin: 0;
+  margin-top: 20px;
   padding: 0;
   font-family: sans-serif;
 }
+
+/************************ FORM ************************/
+button[type='submit'] {
+  position: relative;
+  right: 25px;
+  top: -4px;
+}
+i.fa-crosshairs {
+  position: relative;
+  right: 50px;
+  top: 5px;
+}
+i.fa-crosshairs:hover {
+  cursor: pointer;
+}
+.inputError {
+  background-color: #f9f2f4;
+  border-color: #c7254e;
+}
+.input-container {
+  margin-bottom: 30px;
+  position: relative;
+}
+.error-message {
+  background-color: #f9f2f4;
+  color: #c7254e;
+  padding: 5px;
+  position: absolute;
+  margin: auto;
+}
+.hide {
+  display: none;
+}
+
+/************************ MAP ************************/
+.map-container {
+  border: 2px solid #999;
+  margin: auto;
+  width: 55%;
+}
+
+/************************ LIST ************************/
 .restaurant {
   padding: 10px;
   background-color: #f3f0fa;
@@ -22,7 +65,6 @@ body {
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
   text-transform: capitalize;
-  /* width: 96%; */
 }
 .foods-available li:nth-child(even){
   background-color: #efefef;

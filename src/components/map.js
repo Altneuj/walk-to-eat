@@ -34,7 +34,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="row justify-content-center mt-3">
+      <div className="row map-container justify-content-center mt-3">
         <Gmaps
           width={'800px'}
           height={'600px'}
