@@ -154,10 +154,10 @@ class List extends Component {
                 switch(this.state.filterMode){
                   case 'walk':
                     return (
-                  foodItem.full_nutrients.map(n => {
+                  foodItem.full_nutrients.map((n, index) => {
                     if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
                       return (
-                        <li>{foodItem.food_name} ({n.value} Calories)</li>
+                        <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
                       );
                     }
                   })
