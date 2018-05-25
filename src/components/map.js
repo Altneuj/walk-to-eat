@@ -18,18 +18,6 @@ class Map extends React.Component {
     });
   }
 
-  onDragEnd(e) {
-    console.log('onDragEnd', e);
-  }
-
-  onCloseClick() {
-    console.log('onCloseClick');
-  }
-
-  onClick(e) {
-    console.log('onClick', e);
-  }
-
   renderMarkers() {
     return _.map(this.props.restaurants, restaurant => {
       if (restaurant.position) {
