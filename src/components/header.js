@@ -8,10 +8,10 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      query: '',
+      query: 'McDonald\'s',
       badQuery: false
     }
-    // this.props.fetchCurrent();
+    this.props.fetchCurrent();
   }
 
   validateQuery = (e) => {
