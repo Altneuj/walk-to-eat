@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import geodist from 'geodist'
@@ -6,6 +7,14 @@ import {resetRestaurants} from '../actions'
 
 
 class List extends Component {
+  constructor(props) {
+  super(props);
+}
+  toggleFoodList = (item) => {
+    var list = ReactDOM.findDOMNode(this.refs[item.id]);
+    list.classList.toggle('hide');
+  }
+
   renderListItems() {
     const newListFormat = []
     let foodList = this.props.food
@@ -48,18 +57,24 @@ class List extends Component {
       return categorizedList.map(item => {
         return (
         //TODO VALIDATION
-        <li className='list-group-item' key={item.id}>
-          <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
-            <div className="restaurant">
-              <div className="title">
-                {item.title}
+        <li className='list-group-item row' key={item.id}>
+          <div className='col-9'>
+            <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
+              <div className="restaurant">
+                <div className="title">
+                  {item.title}
+                </div>
+                <div className="details">
+                  {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
+                </div>
               </div>
-              <div className="details">
-                {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
-              </div>
-            </div>
-          </a>
-          <div className="foods-available">
+            </a>
+          </div>
+          <div className='col-3'>
+            <button type='button' onClick={ () => this.toggleFoodList(item)} className="btn btn-primary">Food</button>
+          </div>
+
+          <div className="hide" ref={item.id}>
             <ul>
               {foodList.map(foodItem => {
                 return (
@@ -73,7 +88,6 @@ class List extends Component {
                 )
               })}
             </ul>
-
           </div>
 
         </li>);
@@ -88,7 +102,7 @@ class List extends Component {
   render() {
     if (this.props.restaurants) {
       return (<div>
-        <h3 className="row justify-content-center">Choices below:</h3>
+        <h3 className="row justify-content-center mt-3">Choices below:</h3>
         <ul className='list-group row justify-content-center'>
           {this.renderListItems()}
         </ul>
@@ -96,7 +110,7 @@ class List extends Component {
     }
 
     return (
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mt-3">
         <h1>Please Search a Restaurant :)</h1>
       </div>)
   }

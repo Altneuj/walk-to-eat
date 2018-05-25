@@ -14,7 +14,7 @@ class Header extends Component {
       badQuery: false
     }
 
-    this.props.fetchCurrent();
+    // this.props.fetchCurrent();
 
   }
 

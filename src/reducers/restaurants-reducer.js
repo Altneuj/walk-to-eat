@@ -8,7 +8,6 @@ export default function(state = null, action){
     case FETCH_RESTAURANTS:
       return action.payload.data.results;
     case SHORTENED_LIST:
-    console.log(action.payload)
       return action.payload;
     default:
       return state;

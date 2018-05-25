@@ -30,3 +30,7 @@ body {
 .foods-available li:last-child{
   border-bottom: none;
 }
+
+.hide {
+  display:none;
+}
