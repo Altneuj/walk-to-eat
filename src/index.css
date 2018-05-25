@@ -4,6 +4,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
 /************************ FORM ************************/
 button[type='submit'] {
   position: relative;
@@ -22,15 +23,6 @@ i.fa-crosshairs:hover {
   background-color: #f9f2f4;
   border-color: #c7254e;
 }
-.inputError::after {
-  content: 'Invalid';
-  background: yellow;
-    color: red;
-    display: block;
-    font-weight: bold;
-    width: 100%;
-    height: 100%;
-}
 .input-container {
   margin-bottom: 30px;
   position: relative;
@@ -46,11 +38,13 @@ i.fa-crosshairs:hover {
   display: none;
 }
 
+/************************ MAP ************************/
 .map-container {
   border: 2px solid #999;
   margin: auto;
   width: 55%;
 }
+
 /************************ LIST ************************/
 .restaurant {
   padding: 10px;

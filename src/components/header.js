@@ -3,8 +3,6 @@ import {fetchRestaurants, fetchCurrent, fetchFoods} from '../actions'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +11,7 @@ class Header extends Component {
       query: '',
       badQuery: false
     }
-
     // this.props.fetchCurrent();
-
   }
 
   validateQuery = (e) => {
@@ -32,6 +28,14 @@ class Header extends Component {
     }
   }
 
+  // remove the error message when the user is focused on the input.
+  // this is only relevent after the user has tried to submit a bad request
+  // and the error message has appeared. styles are applied with conditional
+  // classes depending on its state.
+  onFocus = () => {
+    this.setState({badQuery: false})
+  }
+
   render() {
     return(
       <div className="search-bar justify-content-center">
@@ -44,6 +48,7 @@ class Header extends Component {
               <input
                 className={this.state.badQuery ? 'form-control inputError' : "form-control"}
                 id="form-input"
+                onFocus={this.onFocus}
                 onChange={event => this.setState({query: event.target.value})}
                 value={this.state.query} placeholder="McDonald's"/>
                 <div className={this.state.badQuery ? 'error-message' : "hide"}>
@@ -55,7 +60,6 @@ class Header extends Component {
                 onClick={this.props.fetchCurrent}
                 className="fa fa-crosshairs fa-2x"
                 title="Use my location">
-
               </i>
               <button
                 className="btn btn-primary normal-button"
