@@ -168,7 +168,7 @@ class List extends Component {
                 foodItem.full_nutrients.map(n => {
                   if (n.attr_id === 208 && n.value < item.caloriesBurpee) {
                     return (
-                      <li>{foodItem.food_name} ({n.value} Calories)</li>
+                      <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
                     );
                   }
                 })
@@ -178,7 +178,7 @@ class List extends Component {
               foodItem.full_nutrients.map(n => {
                 if (n.attr_id === 208 && n.value < item.caloriesBearCrawl) {
                   return (
-                    <li>{foodItem.food_name} ({n.value} Calories)</li>
+                    <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
                   );
                 }
               })
@@ -189,7 +189,7 @@ class List extends Component {
             foodItem.full_nutrients.map(n => {
               if (n.attr_id === 208 && n.value < item.caloriesLap) {
                 return (
-                  <li>{foodItem.food_name} ({n.value} Calories)</li>
+                  <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
                 );
               }
             })
