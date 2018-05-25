@@ -40,15 +40,20 @@ i.fa-crosshairs:hover {
 
 /************************ MAP ************************/
 .map-container {
-  border: 2px solid #999;
-  margin: auto;
-  width: 55%;
+  margin: 20px auto;
 }
 
 /************************ LIST ************************/
 .restaurant {
   padding: 10px;
   background-color: #f3f0fa;
+  height: 84px;
+}
+li.restaurant {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  list-style: none;
+  margin-bottom: 10px;
 }
 .restaurant .title {
   font-size: 1.5em;
@@ -57,22 +62,34 @@ i.fa-crosshairs:hover {
   margin-bottom: 10px;
   padding: 0;
 }
-.foods-available ul {
+.list-group ul {
   list-style: none;
   padding-left: 0;
 }
-.foods-available li {
+.fa-angle-double-down, .fa-angle-double-up {
+  font-size: 1.3em;
+  position: relative;
+  top: 2px;
+}
+.food-list li {
   border-bottom: 1px solid #ddd;
   padding: 5px 10px;
   text-transform: capitalize;
 }
-.foods-available li:nth-child(even){
+.food-list .food-item:nth-child(even){
   background-color: #efefef;
 }
-.foods-available li:last-child{
+.list-group li:last-child{
   border-bottom: none;
 }
-
+.show-food-list {
+  color: #6a6a6a;
+  float: right;
+  position: relative;
+}
+.show-food-list:hover {
+  cursor: pointer;
+}
 .hide {
   display:none;
 }

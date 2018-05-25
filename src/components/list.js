@@ -9,10 +9,15 @@ import {resetRestaurants} from '../actions'
 class List extends Component {
   constructor(props) {
   super(props);
-}
+  }
+
   toggleFoodList = (item) => {
     let list = ReactDOM.findDOMNode(this.refs[item.id]);
     list.classList.toggle('hide');
+
+    let button =ReactDOM.findDOMNode(this.refs[item.id+"button"]);
+    button.classList.toggle('fa-angle-double-down');
+    button.classList.toggle('fa-angle-double-up');
   }
 
   renderListItems() {
@@ -56,32 +61,36 @@ class List extends Component {
     if (foodList.length > 0) {
       return categorizedList.map(item => {
         return (
-        //TODO VALIDATION
-        <li className='list-group-item row' key={item.id}>
-          <div className='col-9'>
-            <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
-              <div className="restaurant">
-                <div className="title">
-                  {item.title}
-                </div>
-                <div className="details">
+        <li className='list-group-item' key={item.id}>
+          <div className='col-12 restaurant'>
+            <div className="title">
+              {item.title}
+            </div>
+            <div className="details">
+              <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
+                <span>
                   {item.address} ({item.distance} Miles/{item.caloriesAvailable} Calories burned)
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className='col-3'>
-            <button type='button' onClick={ () => this.toggleFoodList(item)} className="btn btn-primary">Food</button>
-          </div>
+                </span>
+              </a>
+              <span
+                onClick={() => this.toggleFoodList(item)}
+                className="show-food-list">
+                Show List <i
+                  ref={`${item.id}button`}
+                  className="fa fa-angle-double-down">
+                </i>
 
+              </span>
+            </div>
+          </div>
           <div className="hide" ref={item.id}>
-            <ul className="flex">
+            <ul className="food-list">
               {foodList.map(foodItem => {
                 return (
-                  foodItem.full_nutrients.map(n => {
+                  foodItem.full_nutrients.map((n, index) => {
                     if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
                       return (
-                        <li order={n.value} className="foodItems">{foodItem.food_name} ({n.value} Calories)</li>
+                        <li key={index} className="food-item">{foodItem.food_name} ({n.value} Calories)</li>
                       );
                     }
                   })
@@ -89,29 +98,23 @@ class List extends Component {
               })}
             </ul>
           </div>
-
         </li>);
       });
     }
-
-
-
-      // this.props.resetRestaurants(categorizedList)
   }
 
   render() {
     if (this.props.restaurants) {
-      return (<div>
-        <h3 className="row justify-content-center mt-3">Choices below:</h3>
-        <ul className='list-group row justify-content-center'>
-          {this.renderListItems()}
-        </ul>
-      </div>);
+      return (
+        <div>
+          <ul className='list-group justify-content-center'>
+            {this.renderListItems()}
+          </ul>
+        </div>);
     }
 
     return (
       <div className="row justify-content-center mt-3">
-        <h1>Please Search a Restaurant :)</h1>
       </div>)
   }
 }
