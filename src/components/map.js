@@ -41,7 +41,7 @@ class Map extends React.Component {
           lat={this.props.coords.latitude}
           lng={this.props.coords.longitude}
           zoom={12}
-          loadingMessage={'Be happy'}
+          loadingMessage={'Secret Message.... Loading....'}
           params={params}
           onMapCreated={this.onMapCreated}
         >

@@ -14,7 +14,8 @@ class List extends Component {
     filterMode: "walk",
     lapNumber: 0
   }
-}
+  }
+
   changeCalories = (item) => {
     switch(this.state.filterMode){
       case 'walk':
@@ -83,6 +84,10 @@ class List extends Component {
   toggleFoodList = (item) => {
     let list = ReactDOM.findDOMNode(this.refs[item.id]);
     list.classList.toggle('hide');
+
+    let button =ReactDOM.findDOMNode(this.refs[item.id+"button"]);
+    button.classList.toggle('fa-angle-double-down');
+    button.classList.toggle('fa-angle-double-up');
   }
 
   renderListItems() {
@@ -107,7 +112,8 @@ class List extends Component {
         item.caloriesLap = (roundTrip) * 100
         item.address = item.vicinity.split('<br/>').join(' ');
 
-        newListFormat.push(item);
+
+          newListFormat.push(item);
       }
     })
 
@@ -130,104 +136,101 @@ class List extends Component {
     if (foodList.length > 0) {
       return categorizedList.map(item => {
         return (
-        //TODO VALIDATION
-        <li className='list-group-item row' key={item.id}>
-          <div className='col-9'>
-            <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
-              <div className="restaurant">
-                <div className="title">
-                  {item.title}
-                </div>
-                <div className="details">
-                  {item.address} ({item.distance} Miles/{this.changeCalories(item)} Calories burned)
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className='col-3'>
-            <button type='button' onClick={ () => this.toggleFoodList(item)} className="btn btn-primary">Food</button>
-          </div>
+        <li className='list-group-item' key={item.id}>
+          <div className='col-12 restaurant'>
+            <div className="title">
+              {item.title}
+            </div>
+            <div className="details">
+              <a href={`https://www.google.com/maps/dir/?api=1&origin=${this.props.currentLocation.latitude},${this.props.currentLocation.longitude}&destination=${item.position[0]},${item.position[1]}&travelmode=walking`} target="blank">
+                <span>
+                {item.address} ({item.distance} Miles/{this.changeCalories(item)} Calories burned)
+                </span>
+              </a>
+              <span
+                onClick={() => this.toggleFoodList(item)}
+                className="show-food-list">
+                Show List <i
+                  ref={`${item.id}button`}
+                  className="fa fa-angle-double-down">
+                </i>
 
+              </span>
+            </div>
+          </div>
           <div className="hide" ref={item.id}>
-            <ul>
+            <ul className="food-list">
               {foodList.map(foodItem => {
                 switch(this.state.filterMode){
                   case 'walk':
                     return (
-                  foodItem.full_nutrients.map((n, index) => {
-                    if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
-                      return (
-                        <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
-                      );
-                    }
-                  })
-                );
+                      foodItem.full_nutrients.map((n, index) => {
+                        if (n.attr_id === 208 && n.value < item.caloriesAvailable) {
+                          return (
+                            <li key={index} className="food-item">{foodItem.food_name} ({n.value} Calories)</li>
+                          );
+                        }
+                      })
+                    );
                 case 'burpee':
-                debugger;
                   return (
-                foodItem.full_nutrients.map(n => {
-                  if (n.attr_id === 208 && n.value < item.caloriesBurpee) {
+                    foodItem.full_nutrients.map((n, index) => {
+                      if (n.attr_id === 208 && n.value < item.caloriesBurpee) {
+                        return (
+                          <li key={index} className="food-item">{foodItem.food_name} ({n.value} Calories)</li>
+                        );
+                      }
+                    })
+                  );
+              case 'bear-crawl':
+                  return (
+                    foodItem.full_nutrients.map((n, index) => {
+                      if (n.attr_id === 208 && n.value < item.caloriesBearCrawl) {
+                        return (
+                          <li key={index} className="food-item">{foodItem.food_name} ({n.value} Calories)</li>
+                        );
+                      }
+                    })
+                  );
+              case 'parking-lot':
+              item.caloriesLap = item.caloriesAvailable + (100 * this.state.lapNumber)
+              return (
+                foodItem.full_nutrients.map((n, index) => {
+                  if (n.attr_id === 208 && n.value < item.caloriesLap) {
                     return (
-                      <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
+                      <li key={index} className="food-item">{foodItem.food_name} ({n.value} Calories)</li>
                     );
                   }
                 })
               );
-              case 'bear-crawl':
-                return (
-              foodItem.full_nutrients.map(n => {
-                if (n.attr_id === 208 && n.value < item.caloriesBearCrawl) {
-                  return (
-                    <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
-                  );
-                }
-              })
-            );
-            case 'parking-lot':
-              item.caloriesLap = item.caloriesAvailable + (100 * this.state.lapNumber)
-              return (
-            foodItem.full_nutrients.map(n => {
-              if (n.attr_id === 208 && n.value < item.caloriesLap) {
-                return (
-                  <li key="index">{foodItem.food_name} ({n.value} Calories)</li>
-                );
               }
-            })
-          );
-
-              }
-
               })}
             </ul>
           </div>
-
         </li>);
       });
     }
-
-
   }
 
   render() {
     if (this.props.restaurants) {
-      return (<div>
-        <h3 className="row justify-content-center mt-3">Choices below:</h3>
-        <button  className='btn' type='button' onClick={()=> this.walkButton()}>Walk</button>
-        <button  className='btn' onClick={()=> this.burpeeButton()}>Burpee</button>
-        <button  className='btn' onClick={()=> this.bearButton()}>Bear-Crawl</button>
-        <button ref="parking-button" className='btn' onClick={()=> this.parkingLot()}>Parking-lot</button>
-        <button ref='reset-button' className='btn' onClick={() => this.setState({lapNumber: 0})}>Reset Laps</button>
-        <h4 ref="laps">Lap Number {this.state.lapNumber}</h4>
-
-        <ul className='list-group row justify-content-center'>
-          {this.renderListItems()}
-        </ul>
-      </div>);
+      return (
+        <div className="restaurants">
+          <button  className='btn' type='button' onClick={()=> this.walkButton()}>Walk</button>
+          <button  className='btn' onClick={()=> this.burpeeButton()}>Burpee</button>
+          <button  className='btn' onClick={()=> this.bearButton()}>Bear-Crawl</button>
+          <button ref="parking-button" className='btn' onClick={()=> this.parkingLot()}>Parking-lot Lap</button>
+          <button ref='reset-button' className='btn' onClick={() => this.setState({lapNumber: 0})}>Reset Laps</button>
+          <h4 ref="laps">Lap Number {this.state.lapNumber}</h4>
+          <ul className='list-group justify-content-center'>
+            {this.renderListItems()}
+          </ul>
+        </div>
+      );
     }
 
     return (
       <div className="row justify-content-center mt-3">
-        <h1>Please Search a Restaurant :)</h1>
       </div>)
   }
 }
