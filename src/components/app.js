@@ -12,7 +12,6 @@ class App extends Component{
         <Header />
         <Map />
         <List />
-        <p className='text-center'> Powered by Cloud based Block-Chain Techonology </p>
       </div>
     )
   }
